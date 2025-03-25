@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Personas</title>
+</head>
+<body>
+    <h1>Registro de Personas</h1>
+    
+    <form id="formNumPersonas" method="POST" action="/">
+        <label for="num_personas">Ingrese el número de personas a registrar:</label>
+        <input type="number" id="num_personas" name="num_personas" min="1" required>
+        <button type="button" onclick="generarCampos()">Generar Campos</button>
+    </form>
+
+    <form id="formularioPersonas" method="POST" action="/" style="display:none;">
+        <!-- Los campos generados dinámicamente aparecerán aquí -->
+        <button type="submit">Registrar Personas</button>
+    </form>
+
+    <script>
+        // Función para generar los campos de entrada para cada persona
+        function generarCampos() {
+            const numPersonas = document.getElementById('num_personas').value;
+            const formulario = document.getElementById('formularioPersonas');
+            const formNumPersonas = document.getElementById('formNumPersonas');
+            
+            // Limpiar campos previos
+            formulario.innerHTML = ''; 
+
+            // Agregar un campo oculto para el número de personas
+            const numPersonasInput = document.createElement('input');
+            numPersonasInput.type = 'hidden';
+            numPersonasInput.name = 'num_personas';
+            numPersonasInput.value = numPersonas;
+            formulario.appendChild(numPersonasInput);
+
+            // Crear campos para cada persona
+            for (let i = 0; i < numPersonas; i++) {
+                const nombreLabel = document.createElement('label');
+                nombreLabel.innerText = `Persona ${i + 1}: Nombre`;
+                const nombreInput = document.createElement('input');
+                nombreInput.type = 'text';
+                nombreInput.name = `nombre_${i}`;
+                nombreInput.required = true;
+
+                const edadLabel = document.createElement('label');
+                edadLabel.innerText = `Edad`;
+                const edadInput = document.createElement('input');
+                edadInput.type = 'number';
+                edadInput.name = `edad_${i}`;
+                edadInput.required = true;
+
+                const notaLabel = document.createElement('label');
+                notaLabel.innerText = `Nota`;
+                const notaInput = document.createElement('input');
+                notaInput.type = 'number';
+                notaInput.name = `nota_${i}`;
+                notaInput.required = true;
+
+                formulario.appendChild(nombreLabel);
+                formulario.appendChild(nombreInput);
+                formulario.appendChild(edadLabel);
+                formulario.appendChild(edadInput);
+                formulario.appendChild(notaLabel);
+                formulario.appendChild(notaInput);
+                formulario.appendChild(document.createElement('br'));
+            }
+
+            // Mostrar el formulario para enviar los datos
+            formulario.style.display = 'block';
+
+            // Ocultar el formulario inicial
+            formNumPersonas.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
