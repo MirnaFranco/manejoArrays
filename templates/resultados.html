@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados del Registro</title>
+</head>
+<body>
+    <h1>Datos Ingresados:</h1>
+    <ul>
+        {% for persona in personas %}
+            <li>{{ persona[0] }}, {{ persona[1] }} años, Nota: {{ persona[2] }}</li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Datos Ordenados por Nota:</h2>
+    <ul>
+        {% for persona in personas_ordenadas %}
+            <li>{{ persona[0] }}, {{ persona[1] }} años, Nota: {{ persona[2] }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="/">Registrar Nuevas Personas</a>
+</body>
+</html>
